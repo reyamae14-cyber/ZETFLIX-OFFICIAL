@@ -1,0 +1,271 @@
+/* Responsive Design Enhancements for ZetFlix */
+
+/* Mobile-first approach with fluid grid system */
+* {
+  box-sizing: border-box;
+}
+
+/* Base responsive typography */
+html {
+  font-size: 16px;
+}
+
+/* Mobile devices (320px - 599px) */
+@media (max-width: 599px) {
+  html {
+    font-size: 14px;
+  }
+  
+  /* Ensure proper touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve text readability */
+  body {
+    line-height: 1.5;
+  }
+  
+  /* Mobile-specific spacing */
+  .mobile-padding {
+    padding: 8px 16px;
+  }
+  
+  .mobile-margin {
+    margin: 8px;
+  }
+}
+
+/* Small tablets (600px - 959px) */
+@media (min-width: 600px) and (max-width: 959px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .tablet-padding {
+    padding: 12px 24px;
+  }
+  
+  .tablet-margin {
+    margin: 12px;
+  }
+}
+
+/* Desktop (960px - 1279px) */
+@media (min-width: 960px) and (max-width: 1279px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .desktop-padding {
+    padding: 16px 32px;
+  }
+  
+  .desktop-margin {
+    margin: 16px;
+  }
+}
+
+/* Large desktop (1280px - 1919px) */
+@media (min-width: 1280px) and (max-width: 1919px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+/* TV and ultra-wide displays (1920px+) */
+@media (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
+  
+  /* TV-friendly focus indicators - only for interactive elements */
+  button:focus, 
+  a:focus, 
+  [role="button"]:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid #e50914;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Larger touch targets for TV remotes */
+  button, a, [role="button"] {
+    min-height: 60px;
+    min-width: 60px;
+    font-size: 1.2rem;
+  }
+  
+  .tv-padding {
+    padding: 24px 48px;
+  }
+  
+  .tv-margin {
+    margin: 24px;
+  }
+}
+
+/* Remove default focus outline for non-TV displays to prevent red line issues */
+@media (max-width: 1919px) {
+  *:focus {
+    outline: none;
+  }
+  
+  /* Add subtle focus indicators for accessibility on desktop/mobile */
+  button:focus, 
+  a:focus, 
+  [role="button"]:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 1px;
+  }
+}
+
+/* Flexible images and media */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive containers */
+.container {
+  width: 100%;
+  max-width: 1366px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 600px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 960px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    padding: 0 48px;
+  }
+}
+
+/* Responsive grid system */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 8px;
+}
+
+/* Mobile-specific utilities */
+@media (max-width: 599px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+  
+  /* Stack columns on mobile */
+  .col {
+    flex: 0 0 100%;
+  }
+}
+
+/* Tablet-specific utilities */
+@media (min-width: 600px) and (max-width: 959px) {
+  .hide-tablet {
+    display: none !important;
+  }
+  
+  .show-tablet {
+    display: block !important;
+  }
+  
+  /* Two columns on tablet */
+  .col {
+    flex: 0 0 50%;
+  }
+}
+
+/* Desktop-specific utilities */
+@media (min-width: 960px) {
+  .hide-desktop {
+    display: none !important;
+  }
+  
+  .show-desktop {
+    display: block !important;
+  }
+}
+
+/* TV-specific utilities */
+@media (min-width: 1920px) {
+  .hide-tv {
+    display: none !important;
+  }
+  
+  .show-tv {
+    display: block !important;
+  }
+  
+  /* Enhanced visibility for TV */
+  .tv-enhanced {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  /* Ensure proper contrast in dark mode */
+  .dark-optimized {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

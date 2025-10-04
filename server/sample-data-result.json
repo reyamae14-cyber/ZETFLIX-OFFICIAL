@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Sample data added successfully",
+  "userId": "68807a85d67fbd2fc0df8818",
+  "data": {
+    "favorites": 3,
+    "watchHistory": 3,
+    "reviews": 2,
+    "totalWatchTime": 376
+  }
+}

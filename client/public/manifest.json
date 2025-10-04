@@ -1,0 +1,15 @@
+{
+  "short_name": "ZETFLIX",
+  "name": "ZETFLIX",
+  "icons": [
+    {
+      "src": "zetflix.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
