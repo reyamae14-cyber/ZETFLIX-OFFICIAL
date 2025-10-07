@@ -16,10 +16,9 @@ app.set('trust proxy', 1)
 
 app.use(cors({
   origin: [
-    'https://newbackend-mu.vercel.app',
-    'https://zetflix-tv.vercel.app',
+    'https://zetflix-official.vercel.app',
+    'https://zetflix-official-backend-lac.vercel.app',
     'http://localhost:3000',
-    'http://localhost:3003'
   ],
   credentials: true
 }))
