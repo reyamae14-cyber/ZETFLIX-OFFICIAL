@@ -7,7 +7,7 @@ import "dotenv/config"
 
 
 
-import routes from "./src/routes/index.route.js"
+import routes from "../src/routes/index.route.js"
 
 const app = express()
 
@@ -65,3 +65,5 @@ mongoose.connect(process.env.MONGODB_URL, {
   console.log({ err })
   process.exit(1)
 })
+
+export default app
