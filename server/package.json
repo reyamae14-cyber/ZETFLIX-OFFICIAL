@@ -5,7 +5,7 @@
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
-    "dev": "nodemon api/index.js",
+    "dev": "nodemon --exec node api/index.js",
     "build": "echo 'No build step required for Node.js backend'",
     "vercel-build": "echo 'Build completed'"
   },

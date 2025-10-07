@@ -3,19 +3,14 @@ import cookieParser from "cookie-parser"
 import express from "express"
 import "dotenv/config"
 
-
-
 import routes from "../src/routes/index.route.js"
 
 import connectDB from "../src/utils/db.js"
 
 const app = express()
 
-// Connect to DB before each request
-app.use(async (req, res, next) => {
-  await connectDB();
-  next();
-});
+// Connect to DB once
+connectDB();
 
 // Trust proxy for Vercel deployment
 app.set('trust proxy', 1)
@@ -53,5 +48,18 @@ app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).json({ message: 'Something went wrong!' })
 })
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  process.exit(1);
+});
+
+// Start server only if not running on Vercel
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 export default app
