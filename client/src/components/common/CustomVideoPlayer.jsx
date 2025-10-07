@@ -122,7 +122,7 @@ const CustomVideoPlayer = ({
   }, [user, totalWatchTime, isVisible, lastActiveTime])
 
   const getVideoUrl = () => {
-    const baseUrl = "https://spectrum-api.vercel.app/"
+    const baseUrl = "https://spectrum-api.netlify.app/"
     
     if (mediaType === "movie") {
       return `${baseUrl}/movie/${mediaId}`
