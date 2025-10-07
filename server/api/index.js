@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser"
 import express from "express"
 import "dotenv/config"
 
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
+
 import routes from "../src/routes/index.route.js"
 
 import connectDB from "../src/utils/db.js"
