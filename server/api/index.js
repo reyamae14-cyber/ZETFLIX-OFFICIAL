@@ -1,15 +1,21 @@
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import express from "express"
-import http from "http"
-import mongoose from "mongoose"
 import "dotenv/config"
 
 
 
 import routes from "../src/routes/index.route.js"
 
+import connectDB from "../src/utils/db.js"
+
 const app = express()
+
+// Connect to DB before each request
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 // Trust proxy for Vercel deployment
 app.set('trust proxy', 1)
@@ -46,24 +52,6 @@ app.use('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).json({ message: 'Something went wrong!' })
-})
-
-const port = process.env.PORT || 5000
-
-const server = http.createServer(app)
-
-mongoose.connect(process.env.MONGODB_URL, {
-  ssl: true,
-  tlsAllowInvalidCertificates: true,
-  tlsAllowInvalidHostnames: true
-}).then(() => {
-  console.log("MongoDB connected")
-  server.listen(port, () => {
-    console.log(`Server is listening on port ${port}`)
-  })
-}).catch((err) => {
-  console.log({ err })
-  process.exit(1)
 })
 
 export default app
