@@ -1038,6 +1038,7 @@ const [localProfileImage, setLocalProfileImage] = useState(() => localStorage.ge
                         />
                       </ListItemAvatar>
                       <ListItemText
+                        disableTypography
                         primary={
                           <Typography variant="subtitle2" sx={{ 
                             fontWeight: 'bold', 

@@ -10,6 +10,7 @@ import userModel from "../models/user.model.js"
 import favoriteModel from "../models/favorite.model.js"
 import reviewModel from "../models/review.model.js"
 import watchHistoryModel from "../models/watchHistory.model.js"
+import { supabase } from "../utils/supabase.js";
 
 const signup = async (req, res) => {
   try {
@@ -138,13 +139,44 @@ const upload = multer({
 
 const updateProfile = async (req, res) => {
   try {
-    const { displayName, profileImage, profileImagePath } = req.body;
+    const { displayName } = req.body;
     const userId = req.user.id;
 
     const updateData = {};
     if (displayName) updateData.displayName = displayName;
-    if (profileImage !== undefined) updateData.profileImage = profileImage;
-    if (profileImagePath !== undefined) updateData.profileImagePath = profileImagePath;
+
+    if (req.file) {
+      const file = req.file;
+      const fileExtension = file.originalname.split('.').pop();
+      const fileName = `${userId}-${Date.now()}.${fileExtension}`;
+      const filePath = `profile-images/${fileName}`;
+
+      const { data, error } = await supabase.storage
+        .from('profile-images')
+        .upload(filePath, file.buffer, {
+          contentType: file.mimetype,
+          upsert: true,
+        });
+
+      if (error) {
+        console.error("Supabase upload error:", error);
+        return responseHandler.error(res, "Failed to upload image.");
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from('profile-images')
+        .getPublicUrl(filePath);
+
+      updateData.profileImage = publicUrlData.publicUrl;
+      updateData.profileImagePath = filePath; // Store the path for potential deletion
+
+      // Delete old profile image if it exists
+      const oldUser = await userModel.findById(userId);
+      if (oldUser && oldUser.profileImagePath) {
+        const oldFilePath = oldUser.profileImagePath;
+        await supabase.storage.from('profile-images').remove([oldFilePath]);
+      }
+    }
 
     const user = await userModel.findByIdAndUpdate(
       userId,
@@ -156,6 +188,7 @@ const updateProfile = async (req, res) => {
 
     responseHandler.ok(res, user);
   } catch (error) {
+    console.error("Error in updateProfile:", error);
     responseHandler.error(res);
   }
 };

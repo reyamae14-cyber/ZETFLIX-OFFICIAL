@@ -145,7 +145,7 @@ const CustomVideoPlayer = ({
         backgroundColor: "#000",
         color: "#fff"
       }}>
-        <p>Video not available for this content</p>
+        <span style={{ textAlign: "center" }}>Video not available for this content</span>
       </Box>
     )
   }

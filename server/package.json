@@ -16,6 +16,7 @@
     "node": "22.x"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.74.0",
     "axios": "^1.7.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
